@@ -95,13 +95,14 @@ function createVertexShader(hasNormals, hasColors, numTexCoords, pointSize) {
         shader += "varying vec2 v_tex" + i + ";\n";
     }
 
-    shader += "\nvoid main() {\n" + "   gl_Position = projection * view * model * " + POSITION_ATTRIBUTE + ";\n"
-            + (hasColors ? "   v_col = " + COLOR_ATTRIBUTE + ";\n" : "");
+    //shader += "\nvoid main() {\n" + "   gl_Position = projection * view * model * " + POSITION_ATTRIBUTE + ";\n"
+    shader += "\nvoid main() {\n" + "   gl_Position = projection * " + POSITION_ATTRIBUTE + ";\n"
+        + (hasColors ? "   v_col = " + COLOR_ATTRIBUTE + ";\n" : "");
 
     for (i = 0; i < numTexCoords; i++) {
         shader += "   v_tex" + i + " = " + TEXCOORD_ATTRIBUTE + i + ";\n";
     }
-    shader += "   gl_PointSize = "+pointSize+";\n";
+    //shader += "   gl_PointSize = "+pointSize+";\n";
     shader += "}\n";
 
     return shader;
@@ -139,7 +140,7 @@ function createFragmentShader(hasColors, numTexCoords) {
         }
     }
 
-    shader += " * tint"
+    //shader += " * tint"
     shader += ";\n}";
     return shader;
 }
